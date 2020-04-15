@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Zeronet - UI</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="description" content="V2ray - UI">
+    <meta name="author" content="ZeroNet">
+    <meta name="viewport" content="width=device-width; initial-scale=1; maximum-scale=1">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="shortcut icon" href="https://www.bootcss.com/p/font-awesome/assets/ico/favicon.ico">
+    <style>
+        #qrcode,
+        #text {
+            max-width: 1024px;
+        }
+
+        #text {
+            width: 95%;
+        }
+
+        img {
+            border: 1px #ddd solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">ZeroNet - UI</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+            aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">QRcode</a>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action list-group-item-while "> / QRcode /</a>
+    </div>
+
+
+    <div class="container">
+        <br>
+        <h2>Gan QRcode</h2>
+
+        <div class="card">
+            <img class="card-img-top" src="holder.js/100x180/" alt="">
+            <div class="card-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>QRcode</th>
+                            <th>Vmess Link</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p id="qrcode"></p>
+                            </td>
+                            <td scope="row"><input type="text" id="text" placeholder="vmess://" autofocus></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            text.value = window.location.hash.substring(1);
+        </script>
+
+        <script
+            src="https://cdn.jsdelivr.net/combine/npm/jquery@2.2.4/dist/jquery.min.js,gh/lrsjng/jquery-qrcode@0.14.0/dist/jquery-qrcode.min.js">
+        </script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/lrsjng/jquery-qrcode@0.14.0/dist/jquery-qrcode.min.js"></script> -->
+        <script type="text/javascript">
+            $(function () {
+
+                function qr(text) {
+                    var options = {
+                        render: 'canvas',
+                        size: 300,
+                        ecLevel: 'Q',
+                        fill: '#233',
+                        background: null,
+                        text: text,
+                        label: '31337',
+                        fontname: 'sans',
+                        fontcolor: '#233',
+                        quiet: 0,
+                        mode: 2
+                    };
+                    $("#qrcode").empty().qrcode(options);
+                }
+
+
+
+                if (window.location.hash) {
+                    var v = window.location.hash.substring(1);
+                    $("#text").val(v);
+                    qr(v);
+                }
+
+                $("#text").on("input", function (e) {
+                    var v = $(e.target).val();
+                    window.location.hash = v;
+                    qr(v);
+                    if (v === "") {
+                        qrcode.innerHTML = 'Null'
+                    } else {
+                        qr(v);
+                    }
+                })
+            })
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
